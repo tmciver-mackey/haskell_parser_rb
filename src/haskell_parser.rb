@@ -67,8 +67,6 @@ class HaskellValueParser
   def parse_list()
     #print "parsing list"
     @buffer.scan /\[/ # consume opening bracket
-#    print @buffer.peek(3)
-#    return nil
     @buffer.scan /\s+/ # consume whitespace
     v = []
     while !@buffer.scan /\]/
@@ -112,10 +110,6 @@ class HaskellValueParser
     @buffer.scan /,/ # consume a possible comma
     @buffer.scan /\s+/ # consume whitespace
     { "#{f}": v }
-  end
-
-  def parseNoteId()
-    parse_field("_mqeNoteId")&.to_i
   end
 
 end
