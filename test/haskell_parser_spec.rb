@@ -91,5 +91,14 @@ RSpec.describe HaskellValueParser do
       parsed = parser.parse_record
       expect(parsed).to eq(expected)
     end
+
+    it "parses a nested record" do
+      s = "A { foo = 1, bar = \"hello\", baz = [1, 2, 3], abc = B { a = \"world\", b = Just 3 } }"
+      expected = {"foo": 1, "bar": "hello", "baz": [1, 2, 3], "abc": {"a": "world", "b": 3}}
+      parser = HaskellValueParser.new(s)
+      parsed = parser.parse_record
+      expect(parsed).to eq(expected)
+    end
+
   end
 end
